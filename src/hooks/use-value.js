@@ -1,17 +1,10 @@
-import { useCallback, useState } from "react";
+import { useState } from 'react';
 
-export function useValue(defaultValue) {
-    const [value, setValue] = useState(defaultValue);
+export default function useValue(initialAmount) {
+    const [amount, setAmount] = useState(initialAmount);
 
-    const addValue = useCallback(() => {
-        setValue(value + 1)
-    }, [value]);
+    const decrement = () => setAmount(amount > 0 ? amount - 1 : 0);
+    const increment = () => setAmount(amount + 1);
 
-    const removeValue = useCallback(() => {
-        if (value > 0) {
-            setValue(value - 1)
-        }
-    }, [value]);
-
-    return { value, addValue, removeValue };
+    return { amount, decrement, increment };
 }
