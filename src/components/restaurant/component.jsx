@@ -1,9 +1,10 @@
 
 import { useMemo } from 'react';
-import { Menu } from '../menu/component';
+import Menu from '../menu/component';
 import { Reviews } from '../reviews/component';
 import { Banner } from '../banner/component';
 import { Rate } from '../rate/component';
+import { ErrorBoundary } from '../error-boundary/component';
 import styles from './styles.module.css';
 
 export const Restaurant = ({ restaurant }) => {
@@ -19,10 +20,13 @@ export const Restaurant = ({ restaurant }) => {
             <Banner heading={name}>
                 <Rate value={averageRating} />
             </Banner>
+
             <div className={styles.restaurant}>
-                <Menu menu={menu} />
-                <Reviews reviews={reviews} />
+                <ErrorBoundary key={restaurant.id}>
+                    <Menu menu={menu} />
+                    <Reviews reviews={reviews} />
+                </ErrorBoundary>
             </div>
-        </div>
+        </div >
     );
 };

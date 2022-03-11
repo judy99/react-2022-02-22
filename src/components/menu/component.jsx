@@ -1,7 +1,8 @@
 import { Product } from "../product/component";
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
-export const Menu = ({ menu }) => {
+const Menu = ({ menu }) => {
     return (
         <div className={styles.menu}>
             <div>
@@ -12,3 +13,14 @@ export const Menu = ({ menu }) => {
         </div>
     );
 }
+
+Menu.propTypes = {
+    menu: PropTypes.array,
+};
+
+
+Menu.defaultProps = {
+    menu: [],
+};
+
+export default Menu;
