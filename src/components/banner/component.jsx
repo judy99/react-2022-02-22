@@ -18,6 +18,7 @@ Banner.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
 }
 
-Banner.defaultProps = {
-  heading: '',
-};
+// heading is marked by isRequired, so you can omit defaultProps
+// Banner.defaultProps = {
+//   heading: '',
+// };
