@@ -1,19 +1,23 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Product } from './component'
+import {increment, decrement, amount} from '../../hooks/use-value'
 
-const testData = {
-    product: {
+    const testProduct = {
         name: 'chicken tikka masala',
         ingredients: ['rice', 'bread', 'chicken'],
         price: 12
-    },
-    decrement: () => console.log('decrement'),
-    increment: () => console.log('increment')
-}
+    }
+
+    const testData = {
+        product: testProduct,
+        amount: 0,
+        increment: increment,
+        decrement: decrement
+    }
+
 it('test product name is on page', () => {
-    const pr = render (<Product  {...testData}/>);
-    console.log('Product: ' + pr);
+    const pr = render (<Product {...testData}  />);
     expect(screen.getByText(testData.product.name)).toBeInTheDocument();
 });
 
@@ -32,26 +36,39 @@ it('test initial amount on page', () => {
     expect(screen.getByText(testData.product.price + ' $')).toBeInTheDocument();
 });
 
-// it('test increment function', () => {
-//     const increment = jest.fn();
+it('test initial amount', () => {
+    
+    render (<Product  {...testData} />);
 
-//     render(<Header effect={mockEffect} />);
-//     render (<Product  {...testData, increment }/>);
+    const counter = screen.getByTestId('counter')
+    expect(counter.innerHTML).toBe('0');
+});
 
 
-//     expect(increment).toHaveBeenCalledTimes(1);
-// });
+it('test click plus button', () => {
+    const mockCallback = jest.fn();
+    
+    render (<Product  {...testData} increment={mockCallback}/>);
+    const plusBtn = screen.getByText('+')
 
-// it('our third test', () => {
-//     const mockCallback = jest.fn();
-//     const mockEffect = jest.fn();
+    fireEvent(plusBtn, new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+    }));
 
-//     render(<Header effect={mockEffect} callback={mockCallback} />);
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+});
 
-//     fireEvent(screen.getByText('click me'), new MouseEvent('click', {
-//         bubbles: true,
-//         cancelable: true,
-//     }));
+it('test click minus button', () => {
+    const mockCallback = jest.fn();
+    
+    render (<Product  {...testData} decrement={mockCallback}/>);
+    const minusBtn = screen.getByText('-')
 
-//     expect(mockCallback).toHaveBeenCalled();
-// });
+    fireEvent(minusBtn, new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+    }));
+
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+});
