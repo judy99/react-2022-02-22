@@ -1,19 +1,18 @@
 import { ADD_PRODUCT, REMOVE_PRODUCT } from '../actions/basket-actions';
 
-const initialState = {
-};
+const initialState = {};
 
 export const basketReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_PRODUCT:
             return {
                 ...state,
-                [action.productName]: (state[action.productName] || 0) + 1,
+                [action.productId]: (state[action.productId] || 0) + 1,
             };
         case REMOVE_PRODUCT:
             return {
                 ...state,
-                [action.productName]: state[action.productName] ? state[action.productName] - 1 : 0,
+                [action.productId]: state[action.productId] ? state[action.productId] - 1 : 0,
             };
         default:
             return state;

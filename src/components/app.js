@@ -15,7 +15,7 @@ export function App({ restaurants }) {
     <ThemeContext.Provider value={theme}>
         <div>
           <Header />
-          <Restaurants restaurants={restaurants} />
+          <Restaurants />
         </div>
     </ThemeContext.Provider>
   );

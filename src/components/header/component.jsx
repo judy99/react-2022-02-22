@@ -6,7 +6,6 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <Logo className={styles.logo}/>
-            <Basket className={styles.basket}/>
         </header>
     )
 };
