@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-
 import { Restaurant } from '../restaurant/component';
 import { Basket } from '../basket/component';
 import { Tabs } from '../tabs/component';

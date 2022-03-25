@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import {selectProducts, selectProductById} from './product-selectors'
+import {selectProducts} from './product-selectors'
 
 export function selectBasket(state) {
     return state.basket;
