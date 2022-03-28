@@ -8,6 +8,7 @@ import { BasketItem } from '../basket-item/component'
 export const Basket = ({ className }) => {
     const productCount = useSelector(selectProductCount);
     const orderedProducts = useSelector(selectOrderedProductIds);
+    
     const price = useSelector(selectTotalPrice);
     return (
         <div className={classnames(styles.root, className)}>
